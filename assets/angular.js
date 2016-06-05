@@ -39,16 +39,16 @@ app.controller("TestController", ["$scope", "$resource", "$routeParams", "$http"
         }
         // $scope.save = function () {
         //
-        //     var Weather = $resource("/test/:zmienna", {zmienna: "@_zmienna"});
-        //     console.log({zmienna: $routeParams.zmienna})
-        //     // var data = {zmienna:$routeParams.zmienna}
-        //     // $scope.zmiennaResource = data;
-        //
-        //     // GET data to odebrane dane po metodzie GET dane z jsona odebrane
-        //     Weather.get({zmienna: $routeParams.zmienna}, function (data) {
-        //         //     console.log({zmienna:$routeParams.zmienna})
-        //         $scope.zmiennaResource = data
-        //     })
+            var Weather = $resource("/test/:zmienna", {zmienna: "@_zmienna"});
+            console.log({zmienna: $routeParams.zmienna})
+            // var data = {zmienna:$routeParams.zmienna}
+            // $scope.zmiennaResource = data;
+        
+            // GET data to odebrane dane po metodzie GET dane z jsona odebrane
+            Weather.get({zmienna: $routeParams.zmienna}, function (data) {
+                //     console.log({zmienna:$routeParams.zmienna})
+                $scope.zmiennaResource = data
+            })
         //
         // }
 

@@ -8,82 +8,162 @@ var express = require("express");
 var router = express.Router();
 var http = require("http");
 
-
+var dataPost = require("../models/dataModel"); // model
 // Add
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 router.get("/test", function (req, res) {
-   console.log("Test")
+    console.log("Test")
 });
 
 
+// router.get("/test/:zmienna", function (req, res) {
+//
+//     var dataGet = {id: req.params.zmienna}
+//     res.json(201, dataGet)
+// });
+//
+// router.post("/test/", function (req, res) {
+//     var dataPost = {
+//         number: req.body.number,
+//         message: req.body.message }
+//     res.json(201, dataPost)
+// })
+//
+// router.post("/test/:post", function (req, res) {
+//     var dataPost = {
+//         post: req.params.zmienna,
+//         number: req.body.number,
+//         message: req.body.message }
+//     res.json(201, dataPost)
+// })
+//
+//
+// router.put("/test/", function (req, res) {
+//
+//     var dataPut = {
+//         post: req.params.zmienna,
+//         number: req.body.number,
+//         message: req.body.message
+//     }
+//     console.log("działa")
+//     res.json(201, dataPut)
+// })
+//
+// router.put("/test/:put", function (req, res) {
+//
+//     var dataPut = {
+//         post: req.params.put,
+//         number: req.body.number,
+//         message: req.body.message
+//     }
+//
+//     res.json(201, dataPut)
+// })
+//
+// router.delete("/test/", function (req, res) {
+//
+//     var dataPut = {
+//         post: req.params.put,
+//         number: req.body.number,
+//         message: req.body.message
+//     }
+//
+//     res.json(201, dataPut)
+// })
+//
+// router.delete("/test/:delete", function (req, res) {
+//
+//     var dataPut = {
+//         post: req.params.delete,
+//         number: req.body.number,
+//         message: req.body.message
+//     }
+//
+//     res.json(201, dataPut)
+// })
 
-router.get("/test/:zmienna", function (req, res) {
-    
-    var dataGet = {id: req.params.zmienna}
-    res.json(201, dataGet)
+// show all
+router.get("/show/all", function (req, res) {
+
+
+    dataPost.find().exec(function (err, data) {
+        if (err) {
+            return next(err)
+        }
+        res.json(201, data)
+    })
+
 });
 
-router.post("/test/", function (req, res) {
-    var dataPost = {
-        number: req.body.number,
-        message: req.body.message }
-    res.json(201, dataPost)
-})
-
-router.post("/test/:post", function (req, res) {
-    var dataPost = {
-        post: req.params.zmienna,
-        number: req.body.number,
-        message: req.body.message }
-    res.json(201, dataPost)
-})
+// showw by number
+router.get("/show/:zmienna", function (req, res) {
 
 
-router.put("/test/", function (req, res) {
+    var dataGet = {number: req.params.zmienna}
 
-    var dataPut = {
-        post: req.params.zmienna,
-        number: req.body.number,
-        message: req.body.message
-    }
-    console.log("działa")
-    res.json(201, dataPut)
-})
 
-router.put("/test/:put", function (req, res) {
+    dataPost.findOne(dataGet).exec(function (err, data) {
+        if (err) {
+            return next(err)
+        }
+        res.json(201, data)
+    })
 
-    var dataPut = {
-        post: req.params.put,
+});
+
+//add
+
+router.post("/add/", function (req, res) {
+    var newData = new dataPost({
         number: req.body.number,
         message: req.body.message
-    }
+    })
 
-    res.json(201, dataPut)
+    newData.save(function (err, dataPost) {
+        if (err) {
+            return next(err)
+        }
+        res.json(201, dataPost)
+        console.log("Dodano post.")
+    })
 })
 
-router.delete("/test/", function (req, res) {
+// update
 
-    var dataPut = {
-        post: req.params.put,
-        number: req.body.number,
-        message: req.body.message
-    }
+router.put("/edit/:zmienna", function (req, res) {
 
-    res.json(201, dataPut)
+
+    dataPost.update(
+        {number: req.params.zmienna},
+        {
+            number: req.body.number,
+            message: req.body.message
+        })
+        .exec(function (err, data) {
+            if (err) {
+                return next(err)
+            }
+            res.json(201, data)
+        })
+
 })
 
-router.delete("/test/:delete", function (req, res) {
 
-    var dataPut = {
-        post: req.params.delete,
-        number: req.body.number,
-        message: req.body.message
-    }
+router.delete("/delete/:zmienna", function (req, res) {
 
-    res.json(201, dataPut)
+
+    dataPost.remove({
+        number: req.params.zmienna
+    }).exec(function (err, data) {
+        if (err) {
+            return next(err)
+        }
+        res.json(201, data)
+    })
+
 })
 
 
