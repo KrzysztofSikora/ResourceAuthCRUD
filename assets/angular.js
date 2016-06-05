@@ -37,45 +37,52 @@ app.controller("TestController", ["$scope", "$resource", "$routeParams", "$http"
 
 
         }
-
-        // var Weather = $resource("/test/:zmienna", {zmienna: "@_zmienna"});
-        // console.log({zmienna: $routeParams.zmienna})
-        // // var data = {zmienna:$routeParams.zmienna}
-        // // $scope.zmiennaResource = data;
+        // $scope.save = function () {
         //
-        // // GET data to odebrane dane po metodzie GET dane z jsona odebrane
-        // Weather.get({zmienna: $routeParams.zmienna}, function (data) {
-        //     //     console.log({zmienna:$routeParams.zmienna})
-        //     $scope.zmiennaResource = data
-        // })
+        //     var Weather = $resource("/test/:zmienna", {zmienna: "@_zmienna"});
+        //     console.log({zmienna: $routeParams.zmienna})
+        //     // var data = {zmienna:$routeParams.zmienna}
+        //     // $scope.zmiennaResource = data;
+        //
+        //     // GET data to odebrane dane po metodzie GET dane z jsona odebrane
+        //     Weather.get({zmienna: $routeParams.zmienna}, function (data) {
+        //         //     console.log({zmienna:$routeParams.zmienna})
+        //         $scope.zmiennaResource = data
+        //     })
+        //
+        // }
+
+        // $scope.save = function () {
 
 
-        $scope.save = function () {
 
-            var parameters = {
-                zmienna: $routeParams.zmienna
-
-            };
-            // // console.log(parameters)
-            var config = {
-                params: parameters
-            };
-
-
-            $http.get('/test/:zmienna', config).success(function () {
-
-                $scope.zmiennaResource = config.params
-                console.log(config.params)
-            })
-        }
-
-        
+            // var config = {
+            //     params: { zmienna: $routeParams.zmienna }
+            // };
+            //
+            //
+            // $http.get('/test/:zmienna', config).success(function () {
+            //
+            //     $scope.zmiennaResource = config.params
+            //     console.log(config.params)
+            // })
 
 
-     
+            // druga wersja
+
+        //     $http({
+        //         method: "GET",
+        //         params: {zmienna: $routeParams.zmienna},
+        //         url: '/test/' + $routeParams.zmienna,
+        //     }).success(function (params) {
+        //
+        //         $scope.zmiennaResource = params
+        //         console.log(params)
+        //     })
+        //
+        // }
 
 
-        
         $scope.put = function () {
             $http({
 
@@ -87,9 +94,7 @@ app.controller("TestController", ["$scope", "$resource", "$routeParams", "$http"
 
             })
         }
-        
-        
-        
-        
+
+
     }]);
 
