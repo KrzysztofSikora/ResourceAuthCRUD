@@ -197,13 +197,20 @@ router.delete("/delete/id/:id", function (req, res) {
 
 })
 
-//image
+// add image
 
 router.post("/", upload.any(), function (req, res, next) {
     console.log('Image upload')
     res.send(201, req.files)
     
 })
+
+// display image
+
+router.get('/image.png', function (req, res) {
+    res.sendfile('./public/uploads/6dc87f7df87da34524a4fead8d80cf0c');
+
+});
 
 
 module.exports = router;
