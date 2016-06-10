@@ -7,9 +7,14 @@ app.config(["$routeProvider", function ($routeProvider) {
     "use strict";
     $routeProvider
         .when("/", {
-            templateUrl: "/partials/test.html",
+            templateUrl: "/partials/image_form.html",
             controller: "TestController"
         })
+
+        // .when("/", {
+        //     templateUrl: "/partials/test.html",
+        //     controller: "TestController"
+        // })
 
         .when("/test/:zmienna", {
             templateUrl: "/partials/test.html",

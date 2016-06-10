@@ -10,9 +10,24 @@ var http = require("http");
 
 var dataPost = require("../models/dataModel"); // model
 // Add
+
+
+
+
+//endimgae
+
 var app = express();
 var bodyParser = require('body-parser');
+
+
+
 app.use(bodyParser.json());
+
+
+//image
+var multer = require('multer')
+var upload = multer({ dest: '../public/uploads' })
+
 
 router.get("/test", function (req, res) {
     console.log("Test")
@@ -118,6 +133,7 @@ router.get("/show/:zmienna", function (req, res) {
 
 router.post("/add/", function (req, res) {
     var newData = new dataPost({
+        owner: req.body.owner,
         number: req.body.number,
         message: req.body.message
     })
@@ -139,6 +155,7 @@ router.put("/edit/:zmienna", function (req, res) {
     dataPost.update(
         {number: req.params.zmienna},
         {
+            owner: req.body.owner,
             number: req.body.number,
             message: req.body.message
         })
@@ -164,6 +181,28 @@ router.delete("/delete/:zmienna", function (req, res) {
         res.json(201, data)
     })
 
+})
+
+router.delete("/delete/id/:id", function (req, res) {
+
+
+    dataPost.remove({
+        _id: req.params.id
+    }).exec(function (err, data) {
+        if (err) {
+            return next(err)
+        }
+        res.json(201, data)
+    })
+
+})
+
+//image
+
+router.post("/", upload.any(), function (req, res, next) {
+    console.log('Image upload')
+    res.send(201, req.files)
+    
 })
 
 
