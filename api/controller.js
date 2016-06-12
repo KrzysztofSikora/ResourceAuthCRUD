@@ -201,7 +201,9 @@ router.delete("/delete/id/:id", function (req, res) {
 
 router.post("/", upload.any(), function (req, res, next) {
     console.log('Image upload')
-    res.send(201, req.files)
+    var dataRequest = {imageData: req.files,
+    metaData: req.body}
+    res.json(dataRequest)
     
 })
 
