@@ -235,6 +235,26 @@ router.get("/save", function (req, res) {
     })
 })
 
+router.get("/display/:imgId", function (req, res) {
+
+    var dataGet = {_id: req.params.imgId}
+
+
+    dataImage.findOne(dataGet).exec(function (err, doc) {
+        if (err) {
+            return next(err)
+        }
+        res.contentType(doc.img.contentType);
+        res.send(doc.img.data);
+
+    })
+
+
+
+    // res.json("test")
+
+})
+
 //
 
 // router.post("/add/", function (req, res) {
