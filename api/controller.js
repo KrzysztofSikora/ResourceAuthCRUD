@@ -11,22 +11,28 @@ var http = require("http");
 var dataPost = require("../models/dataModel"); // model
 // Add
 
-
-
-
-//endimgae
+var dataImage = require("../models/imageModel")
 
 var app = express();
 var bodyParser = require('body-parser');
-
+var fs = require('fs');
 
 
 app.use(bodyParser.json());
 
-
-//image
 var multer = require('multer')
-var upload = multer({ dest: '../public/uploads' })
+
+ 
+
+
+
+
+
+
+var upload = multer({ dest: './public/uploads' })
+
+
+//endimgae
 
 
 router.get("/test", function (req, res) {
@@ -199,13 +205,55 @@ router.delete("/delete/id/:id", function (req, res) {
 
 // add image
 
-router.post("/", upload.any(), function (req, res, next) {
-    console.log('Image upload')
-    var dataRequest = {imageData: req.files,
-    metaData: req.body}
-    res.json(dataRequest)
-    
+// router.post("/", upload.any(), function (req, res, next) {
+//     console.log('Image upload')
+//     var dataRequest = {imageData: req.files,
+//     metaData: req.body}
+//
+//     res.json(dataRequest)
+//
+//
+// })
+
+
+// save image to mongodb
+
+router.get("/save", function (req, res) {
+    var newData = new dataImage({
+        
+        img: {data: fs.readFileSync('./public/uploads/8df6948370dcebafbfc2bd22f96c4ed4'),
+        contentType: 'image/png'}
+        
+    })
+
+    newData.save(function (err, newData) {
+        if (err) {
+            return next(err)
+        }
+        res.json(201, newData)
+        console.log("Dodano zdjecie.")
+    })
 })
+
+//
+
+// router.post("/add/", function (req, res) {
+//     var newData = new dataPost({
+//         owner: req.body.owner,
+//         number: req.body.number,
+//         message: req.body.message
+//     })
+//
+//     newData.save(function (err, dataPost) {
+//         if (err) {
+//             return next(err)
+//         }
+//         res.json(201, dataPost)
+//         console.log("Dodano post.")
+//     })
+// })
+
+
 
 // display image
 
@@ -213,6 +261,69 @@ router.get('/image.png', function (req, res) {
     res.sendfile('./public/uploads/6dc87f7df87da34524a4fead8d80cf0c');
 
 });
+//
+var formidable = require('formidable')
+var util = require("util");
+//
+// router.post("/", function (req, res, next) {
+//     var form = new formidable.IncomingForm();
+//
+//     form.parse(req, function(err, fields, files) {
+//         // res.writeHead(200, {'content-type': 'text/plain'});
+//         // res.write('received upload:\n\n');
+//         // res.end(util.inspect({fields: fields, files: files}));
+//         console.log(files)
+//         console.log(fields)
+//         res.json(req.files)
+//     });
+//
+// })
+var Busboy = require('busboy');
+router.post('/', function (req, res, params) {
 
+
+        // Create an Busyboy instance passing the HTTP Request headers.
+        var busboy = new Busboy({ headers: req.headers });
+
+        // Listen for event when Busboy finds a file to stream.
+        busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
+
+            // We are streaming! Handle chunks
+            file.on('data', function (data) {
+                // Here we can act on the data chunks streamed.
+                var złom = { binaryDataImage : data};
+                res.json(złom)
+            });
+
+            // Completed streaming the file.
+            file.on('end', function () {
+                console.log('Finished with ' + fieldname);
+            });
+        });
+
+        // Listen for event when Busboy finds a non-file field.
+        busboy.on('field', function (fieldname, val) {
+            // Do something with non-file field.
+        });
+
+        // Listen for event when Busboy is finished parsing the form.
+        busboy.on('finish', function () {
+            res.statusCode = 200;
+            res.end();
+        });
+
+        // Pipe the HTTP Request into Busboy.
+        req.pipe(busboy);
+        console.log(busboy)
+
+});
+
+
+
+
+
+
+
+//
 
 module.exports = router;

@@ -5,9 +5,8 @@ var db = require('../db');
 
 var imageModel = db.model('imageModel', {
 
-    imgName: { type: String },
-    imgNumber: { type: String },
-    description:{ type: String }
+    img: { data: Buffer, contentType: String }
+
 
 })
 
