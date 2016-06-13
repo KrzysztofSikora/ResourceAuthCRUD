@@ -16,6 +16,38 @@ app.config(["$routeProvider", function ($routeProvider) {
         //     controller: "TestController"
         // })
 
+        .when("/image_form", {
+            templateUrl: "/partials/image_form.html",
+            controller: "TestController"
+        })
+        
+        .when("/all/", {
+            templateUrl: "/partials/all.html",
+            controller: "AllController"
+        })
+
+        .when("/technology/", {
+            templateUrl: "/partials/technology.html",
+            controller: "TechnologyController"
+        })
+
+        .when("/registry/", {
+            templateUrl: "/partials/register.html",
+            controller: "RegisterController"
+        })
+
+        .when("/login/", {
+            templateUrl: "/partials/login.html",
+            controller: "LoginController"
+        })
+
+        .when("/rule/", {
+            templateUrl: "/partials/rule.html",
+            controller: "RulenController"
+        })
+        
+        
+        
         .when("/test/:zmienna", {
             templateUrl: "/partials/test.html",
             controller: "TestController"
@@ -30,6 +62,23 @@ app.config(["$routeProvider", function ($routeProvider) {
         });
 }]);
 
+app.controller('AllController', function ($scope, $http) {
+
+    $scope.posts = [
+        {}
+    ];
+
+// pobieranie za pomocą 'GET' wszystkich postów z api za pomocą $http
+    $http.get('/api/dataModel').success(function (posts) {
+        $scope.posts = posts
+
+    })
+
+
+
+
+
+})
 
 app.controller("TestController", ["$scope", "$resource", "$routeParams", "$http",
     function ($scope, $resource, $routeParams, $http) {

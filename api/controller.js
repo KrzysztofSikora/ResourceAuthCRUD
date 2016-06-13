@@ -255,7 +255,18 @@ router.get("/display/:imgId", function (req, res) {
 
 })
 
-//
+
+router.get('/api/dataModel', function (req, res, next) {
+    dataPost.find()
+        .sort('-date')
+        .exec(function (err, posts) {
+            if (err) {
+                return next(err)
+            }
+            res.json(posts)
+        })
+})
+
 
 // router.post("/add/", function (req, res) {
 //     var newData = new dataPost({

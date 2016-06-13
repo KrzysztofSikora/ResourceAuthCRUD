@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app='app'>
 <head>
-    <title>tytuł</title>
+    <title>Aplikacja</title>
     <script src="/javascripts/js/jquery.js"></script>
     <link rel='stylesheet' href='/css/bootstrap.min.css'>
     <link rel='stylesheet' href='/css/bootstrap-theme.min.css'>
@@ -23,6 +23,21 @@
             <!--</div>-->
         <!--</form>-->
     <!--</div>-->
+    <nav class='navbar navbar-default'>
+        <div class='container'>
+            <ul class='nav navbar-nav'>
+                <li><a href='/#/'>Form</a></li>
+                <li><a href='/#/all'>Wszystko</a></li>
+                <li><a href='/#/technology'>Technologia</a></li>
+                <li><a href='/#/registry'>Rejestracja</a></li>
+                <li><a href='/#/login'>Logowanie</a></li>
+                <li><a href='/#/rule'>Regulamin</a></li>
+            </ul>
+            <!--<p ng-if='currentUser' class='navbar-text navbar-right'>-->
+                <!--Zalogowany jako {{currentUser.username}}-->
+            <!--</p>-->
+        </div>
+    </nav>
     <div class="jumbotron">
         <div ng-view>
 
