@@ -80,6 +80,24 @@ app.controller('AllController', function ($scope, $http) {
 
 })
 
+
+app.controller('TechnologyController', function ($scope, $http) {
+
+    $scope.posts = [
+        {}
+    ];
+
+// pobieranie za pomocą 'GET' wszystkich postów z api za pomocą $http
+    $http.get('/api/dataModel/technology').success(function (posts) {
+        $scope.posts = posts
+
+    })
+
+
+})
+
+
+
 app.controller("TestController", ["$scope", "$resource", "$routeParams", "$http",
     function ($scope, $resource, $routeParams, $http) {
 

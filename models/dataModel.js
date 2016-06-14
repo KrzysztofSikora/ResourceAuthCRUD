@@ -8,6 +8,7 @@ var dataModel = db.model('dataModel', {
     
     owner: { type: String }, //zwalidować czy jest taki sam chuj przy projektowani modeul usera
     number: { type: String },
+    category: { type: String },
     message:{ type: String }
     
 })

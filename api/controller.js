@@ -141,7 +141,9 @@ router.post("/add/", function (req, res) {
     var newData = new dataPost({
         owner: req.body.owner,
         number: req.body.number,
-        message: req.body.message
+        message: req.body.message,
+        category: req.body.category
+
     })
 
     newData.save(function (err, dataPost) {
@@ -163,7 +165,8 @@ router.put("/edit/:zmienna", function (req, res) {
         {
             owner: req.body.owner,
             number: req.body.number,
-            message: req.body.message
+            message: req.body.message,
+            category: req.body.category
         })
         .exec(function (err, data) {
             if (err) {
@@ -258,6 +261,21 @@ router.get("/display/:imgId", function (req, res) {
 
 router.get('/api/dataModel', function (req, res, next) {
     dataPost.find()
+        .sort('-date')
+        .exec(function (err, posts) {
+            if (err) {
+                return next(err)
+            }
+            res.json(posts)
+        })
+})
+
+router.get('/api/dataModel/:category', function (req, res, next) {
+
+    var dataGet = {category: req.params.category}
+    
+    
+    dataPost.find(dataGet)
         .sort('-date')
         .exec(function (err, posts) {
             if (err) {
