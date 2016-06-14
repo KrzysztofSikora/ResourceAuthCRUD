@@ -5,12 +5,23 @@
 var db = require('../db');
 
 var dataModel = db.model('dataModel', {
-    
-    owner: { type: String }, //zwalidować czy jest taki sam chuj przy projektowani modeul usera
-    number: { type: String },
-    category: { type: String },
-    message:{ type: String }
-    
+
+    fieldname: {type: String},
+    originalname: {type: String},
+    encoding: {type: String},
+    mimetype: {type: String},
+    destination: {type: String},
+    filename: {type: String},
+    path: {type: String},
+    size: {type: String},
+
+
+
+    owner: {type: String}, //zwalidować czy jest taki sam chuj przy projektowani modeul usera
+    number: {type: String},
+    category: {type: String},
+    description: {type: String}
+
 })
 
 

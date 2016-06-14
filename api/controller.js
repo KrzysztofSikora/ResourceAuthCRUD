@@ -32,6 +32,10 @@ var multer = require('multer')
 var upload = multer({ dest: './public/uploads' })
 
 
+
+
+
+
 //endimgae
 
 
@@ -258,6 +262,7 @@ router.get("/display/:imgId", function (req, res) {
 
 })
 
+//////////////////////////////////////////////////////////////////////////
 
 router.get('/api/dataModel', function (req, res, next) {
     dataPost.find()
@@ -286,23 +291,58 @@ router.get('/api/dataModel/:category', function (req, res, next) {
 })
 
 
-// router.post("/add/", function (req, res) {
-//     var newData = new dataPost({
-//         owner: req.body.owner,
-//         number: req.body.number,
-//         message: req.body.message
-//     })
-//
-//     newData.save(function (err, dataPost) {
-//         if (err) {
-//             return next(err)
-//         }
-//         res.json(201, dataPost)
-//         console.log("Dodano post.")
-//     })
-// })
+router.post("/", upload.any(), function (req, res, next) {
+    console.log('Image upload')
+
+    var newData = new dataPost({
+
+        
+        fieldname: req.files[0].fieldname,
+        originalname:  req.files[0].originalname,
+        encoding:  req.files[0].encoding,
+        mimetype:  req.files[0].mimetype,
+        destination:  req.files[0].destination,
+        filename:  req.files[0].filename,
+        path:  req.files[0].path,
+        size:  req.files[0].size,
 
 
+        owner: req.body.owner,
+        number: null,
+        category: req.body.category,
+        description: req.body.description
+    })
+
+    newData.save(function (err, newData) {
+        if (err) {
+            return next(err)
+        }
+        res.json(201, newData)
+        console.log("Dodano zdjecie.")
+    })
+
+
+})
+
+router.get('/:imageId', function (req, res, next) {
+    var dataGet = {_id: req.params.imageId}
+
+
+    dataPost.findOne(dataGet).exec(function (err, doc) {
+        if (err) {
+            return next(err)
+        }
+        // res.contentType(doc.img.contentType);
+        // res.send(doc.img.data);
+        console.log(" sciezka "+doc.path)
+
+        res.sendfile('./' +  doc.path);
+        // res.sendfile('./public/uploads/de898816bd6068e034ee430f57d13f2d');
+    })
+
+  
+
+});
 
 // display image
 
@@ -311,8 +351,8 @@ router.get('/image.png', function (req, res) {
 
 });
 //
-var formidable = require('formidable')
-var util = require("util");
+// var formidable = require('formidable')
+// var util = require("util");
 //
 // router.post("/", function (req, res, next) {
 //     var form = new formidable.IncomingForm();
@@ -327,45 +367,45 @@ var util = require("util");
 //     });
 //
 // })
-var Busboy = require('busboy');
-router.post('/', function (req, res, params) {
-
-
-        // Create an Busyboy instance passing the HTTP Request headers.
-        var busboy = new Busboy({ headers: req.headers });
-
-        // Listen for event when Busboy finds a file to stream.
-        busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
-
-            // We are streaming! Handle chunks
-            file.on('data', function (data) {
-                // Here we can act on the data chunks streamed.
-                var złom = { binaryDataImage : data};
-                res.json(złom)
-            });
-
-            // Completed streaming the file.
-            file.on('end', function () {
-                console.log('Finished with ' + fieldname);
-            });
-        });
-
-        // Listen for event when Busboy finds a non-file field.
-        busboy.on('field', function (fieldname, val) {
-            // Do something with non-file field.
-        });
-
-        // Listen for event when Busboy is finished parsing the form.
-        busboy.on('finish', function () {
-            res.statusCode = 200;
-            res.end();
-        });
-
-        // Pipe the HTTP Request into Busboy.
-        req.pipe(busboy);
-        console.log(busboy)
-
-});
+// var Busboy = require('busboy');
+// router.post('/', function (req, res, params) {
+//
+//
+//         // Create an Busyboy instance passing the HTTP Request headers.
+//         var busboy = new Busboy({ headers: req.headers });
+//
+//         // Listen for event when Busboy finds a file to stream.
+//         busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
+//
+//             // We are streaming! Handle chunks
+//             file.on('data', function (data) {
+//                 // Here we can act on the data chunks streamed.
+//                 var złom = { binaryDataImage : data};
+//                 res.json(złom)
+//             });
+//
+//             // Completed streaming the file.
+//             file.on('end', function () {
+//                 console.log('Finished with ' + fieldname);
+//             });
+//         });
+//
+//         // Listen for event when Busboy finds a non-file field.
+//         busboy.on('field', function (fieldname, val) {
+//             // Do something with non-file field.
+//         });
+//
+//         // Listen for event when Busboy is finished parsing the form.
+//         busboy.on('finish', function () {
+//             res.statusCode = 200;
+//             res.end();
+//         });
+//
+//         // Pipe the HTTP Request into Busboy.
+//         req.pipe(busboy);
+//         console.log(busboy)
+//
+// });
 
 
 
