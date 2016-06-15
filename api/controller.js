@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 
 var multer = require('multer')
 
- 
+
 
 
 
@@ -317,10 +317,10 @@ router.post("/", upload.any(), function (req, res, next) {
         if (err) {
             return next(err)
         }
-        res.json(201, newData)
+        // res.json(201, newData)
         console.log("Dodano zdjecie.")
+        res.redirect('http://localhost:3000/#/all/');
     })
-
 
 })
 

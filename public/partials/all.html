@@ -2,11 +2,10 @@
     <h3>Wszystko</h3>
     <ul class='list-group'>
         <li ng-repeat="post in posts | orderBy:' -date'" class='list-group-item'>
-            <strong>@{{ post.owner }} </strong>
-            <span> {{ post._id }} </span>
-            <span> {{ post.number }} </span>
-            <span> {{ post.message }} </span>
-            <span> Kategoria: {{ post.category }} </span>
+            <div class="text-left"><h4><strong>@Dodał: {{ post.owner }} </strong></h4></div>
+            <div class="text-left"><h4>Kategoria: {{ post.category }} </h4></div>
+            <img src="/{{ post._id}}" class="img-responsive" style="display:block;margin:auto" />
+            <div class="text-center"><h2>{{ post.description }} </h2></div>
         </li>
     </ul>
 </div>
