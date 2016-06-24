@@ -20,7 +20,7 @@ app.config(["$routeProvider", function ($routeProvider) {
             templateUrl: "/partials/image_form.html",
             controller: "TestController"
         })
-        
+
         .when("/all/", {
             templateUrl: "/partials/all.html",
             controller: "AllController"
@@ -45,9 +45,8 @@ app.config(["$routeProvider", function ($routeProvider) {
             templateUrl: "/partials/rule.html",
             controller: "RulenController"
         })
-        
-        
-        
+
+
         .when("/test/:zmienna", {
             templateUrl: "/partials/test.html",
             controller: "TestController"
@@ -57,10 +56,73 @@ app.config(["$routeProvider", function ($routeProvider) {
             templateUrl: "/partials/test.html",
             controller: "TestController"
         })
+        .when('/signin', {
+            templateUrl: '/partials/signin.html',
+            controller: 'authController'
+        })
+        .when('/signup', {
+            templateUrl: '/partials/signup.html',
+            controller: 'authController'
+         })
+        .when('/user', {
+            templateUrl: '/partials/userinfo.html',
+            controller: 'authController'
+        })
         .otherwise({
             redirectTo: "/"
-        });
+    });
 }]);
+
+app.controller('authController', function($scope,$http,$location) {
+
+    $scope.user  = {username:'',password:''};
+    $scope.alert = '';
+
+    $scope.login = function(user){
+        $http.post('/auth/login', user).
+        success(function(data) {
+            $scope.loggeduser = data;
+            $location.path('/user');
+        }).
+        error(function() {
+            $scope.alert = 'Login failed'
+        });
+
+    };
+
+    $scope.signup = function(user){
+        $http.post('/auth/signup', user).
+        success(function(data) {
+            $scope.alert = data.alert;
+        }).
+        error(function() {
+            $scope.alert = 'Registration failed'
+        });
+
+    };
+
+    $scope.userinfo = function() {
+        $http.get('/auth/currentuser').
+        success(function (data) {
+            $scope.loggeduser = data;
+        }).
+        error(function () {
+            $location.path('/signin');
+        });
+    }
+
+    $scope.logout = function(){
+        $http.get('/auth/logout')
+            .success(function() {
+                $scope.loggeduser = {};
+                $location.path('/signin');
+
+            })
+            .error(function() {
+                $scope.alert = 'Logout failed'
+            });
+    };
+});
 
 app.controller('AllController', function ($scope, $http) {
 
@@ -73,9 +135,6 @@ app.controller('AllController', function ($scope, $http) {
         $scope.posts = posts
 
     })
-
-
-
 
 
 })
@@ -97,7 +156,6 @@ app.controller('TechnologyController', function ($scope, $http) {
 })
 
 
-
 app.controller("TestController", ["$scope", "$resource", "$routeParams", "$http",
     function ($scope, $resource, $routeParams, $http) {
 
@@ -111,36 +169,35 @@ app.controller("TestController", ["$scope", "$resource", "$routeParams", "$http"
         }
         // $scope.save = function () {
         //
-            var Weather = $resource("/test/:zmienna", {zmienna: "@_zmienna"});
-            console.log({zmienna: $routeParams.zmienna})
-            // var data = {zmienna:$routeParams.zmienna}
-            // $scope.zmiennaResource = data;
-        
-            // GET data to odebrane dane po metodzie GET dane z jsona odebrane
-            Weather.get({zmienna: $routeParams.zmienna}, function (data) {
-                //     console.log({zmienna:$routeParams.zmienna})
-                $scope.zmiennaResource = data
-            })
+        var Weather = $resource("/test/:zmienna", {zmienna: "@_zmienna"});
+        console.log({zmienna: $routeParams.zmienna})
+        // var data = {zmienna:$routeParams.zmienna}
+        // $scope.zmiennaResource = data;
+
+        // GET data to odebrane dane po metodzie GET dane z jsona odebrane
+        Weather.get({zmienna: $routeParams.zmienna}, function (data) {
+            //     console.log({zmienna:$routeParams.zmienna})
+            $scope.zmiennaResource = data
+        })
         //
         // }
 
         // $scope.save = function () {
 
 
+        // var config = {
+        //     params: { zmienna: $routeParams.zmienna }
+        // };
+        //
+        //
+        // $http.get('/test/:zmienna', config).success(function () {
+        //
+        //     $scope.zmiennaResource = config.params
+        //     console.log(config.params)
+        // })
 
-            // var config = {
-            //     params: { zmienna: $routeParams.zmienna }
-            // };
-            //
-            //
-            // $http.get('/test/:zmienna', config).success(function () {
-            //
-            //     $scope.zmiennaResource = config.params
-            //     console.log(config.params)
-            // })
 
-
-            // druga wersja
+        // druga wersja
 
         //     $http({
         //         method: "GET",
