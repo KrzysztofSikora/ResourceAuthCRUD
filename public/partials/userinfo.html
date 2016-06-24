@@ -1,5 +1,6 @@
 <div class="row">
-    <div class="col-md-6">
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">{{loggeduser.firstname}} {{loggeduser.lastname}}</h3>
@@ -26,12 +27,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-offset-3 col-md-9">
-                <button id="btn brn-default" type="button" class="btn btn-primary" ng-click="userinfo()"></i>   </button>
-            </div>
             <div class="panel-footer">
-                <button class="btn btn-danger" ng-click="logout()">Logout  </button>
+                <button class="btn btn-danger" ng-click="logout()">Logout</button>
+                <button id="btn btn-default" type="button" class="btn btn-primary" ng-click="userinfo()">User Info
+                </button>
             </div>
         </div>
+
     </div>
 </div>

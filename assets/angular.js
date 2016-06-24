@@ -100,6 +100,15 @@ app.controller('authController', function($scope,$http,$location) {
         });
 
     };
+    // $http.get('/#/user').success(function () {
+    //     $http.get('/auth/currentuser').
+    //         success(function (data) {
+    //             $scope.loggeduser = data;
+    //         }).
+    //         error(function () {
+    //             $location.path('/signin');
+    //         });
+    //     })
 
     $scope.userinfo = function() {
         $http.get('/auth/currentuser').
