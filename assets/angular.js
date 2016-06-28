@@ -18,7 +18,8 @@ app.config(["$routeProvider", function ($routeProvider) {
 
         .when("/image_form", {
             templateUrl: "/partials/image_form.html",
-            controller: "TestController"
+            controller: "ImageController",
+            // controller: "authController"
         })
 
         .when("/all/", {
@@ -43,7 +44,7 @@ app.config(["$routeProvider", function ($routeProvider) {
 
         .when("/rule/", {
             templateUrl: "/partials/rule.html",
-            controller: "RulenController"
+            // controller: "RulenController"
         })
 
 
@@ -73,6 +74,30 @@ app.config(["$routeProvider", function ($routeProvider) {
     });
 }]);
 
+
+
+
+app.controller('ImageController', function($scope,$http,$location) {
+
+
+    $scope.change = function () {
+        $http.get('/auth/currentuser').
+        success(function (data) {
+            $scope.loggeduser = data;
+
+
+        }).
+        error(function () {
+            $location.path('/signin');
+        });
+    }
+
+
+});
+
+
+
+
 app.controller('authController', function($scope,$http,$location) {
 
     $scope.user  = {username:'',password:''};
@@ -100,15 +125,7 @@ app.controller('authController', function($scope,$http,$location) {
         });
 
     };
-    // $http.get('/#/user').success(function () {
-    //     $http.get('/auth/currentuser').
-    //         success(function (data) {
-    //             $scope.loggeduser = data;
-    //         }).
-    //         error(function () {
-    //             $location.path('/signin');
-    //         });
-    //     })
+   
 
     $scope.userinfo = function() {
         $http.get('/auth/currentuser').
@@ -119,6 +136,20 @@ app.controller('authController', function($scope,$http,$location) {
             $location.path('/signin');
         });
     }
+
+    // $scope.change = function () {
+    //     $http.get('/auth/currentuser').
+    //     success(function (data) {
+    //         $scope.loggeduser = data;
+    //
+    //
+    //     }).
+    //     error(function () {
+    //         $location.path('/signin');
+    //     });
+    // }
+
+
 
     $scope.logout = function(){
         $http.get('/auth/logout')

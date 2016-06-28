@@ -92,9 +92,9 @@ function isAuthenticated(req, res, next) {
     res.send(401);
 }
 
-router.get('/test', function (req, res) {
-    console.log('test');
-})
+// router.get('/test', function (req, res) {
+//     console.log('test');
+// })
 
 router.post('/auth/login', passport.authenticate('local'), function (req, res) {
     res.json(req.user);

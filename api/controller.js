@@ -293,10 +293,13 @@ router.get('/api/dataModel/:category', function (req, res, next) {
 
 router.post("/", upload.any(), function (req, res, next) {
     console.log('Image upload')
+  
 
+    console.log(req.files)
+    console.log(req.body)
     var newData = new dataPost({
 
-        
+
         fieldname: req.files[0].fieldname,
         originalname:  req.files[0].originalname,
         encoding:  req.files[0].encoding,
@@ -321,7 +324,7 @@ router.post("/", upload.any(), function (req, res, next) {
         console.log("Dodano zdjecie.")
         res.redirect('http://localhost:3000/#/all/');
     })
-
+    //  res.json(201, req.body)
 })
 
 router.get('/:imageId', function (req, res, next) {
