@@ -32,6 +32,18 @@
                 <button id="btn btn-default" type="button" class="btn btn-primary" ng-click="userinfo()">User Info
                 </button>
             </div>
+
+
+            <div ng-if="loggeduser != loggeduser.fistname">
+                <!-- code to render a large video block-->
+                <p> nie jest null</p>
+            </div>
+
+            <div ng-if="loggeduser == loggeduser.fistname">
+                <!-- code to render a large video block-->
+                <p> jest null</p>
+            </div>
+
         </div>
 
     </div>

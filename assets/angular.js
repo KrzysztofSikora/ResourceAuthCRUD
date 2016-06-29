@@ -7,8 +7,8 @@ app.config(["$routeProvider", function ($routeProvider) {
     "use strict";
     $routeProvider
         .when("/", {
-            templateUrl: "/partials/image_form.html",
-            controller: "TestController"
+            templateUrl: '/partials/signin.html',
+            controller: 'authController'
         })
 
         // .when("/", {
@@ -16,7 +16,7 @@ app.config(["$routeProvider", function ($routeProvider) {
         //     controller: "TestController"
         // })
 
-        .when("/image_form", {
+        .when("/form", {
             templateUrl: "/partials/image_form.html",
             controller: "ImageController",
             // controller: "authController"
@@ -94,7 +94,23 @@ app.controller('ImageController', function($scope,$http,$location) {
 
 
 });
+app.controller('MenuController', function($scope,$http,$location) {
 
+
+    $scope.change = function () {
+        $http.get('/auth/currentuser').
+        success(function (data) {
+            $scope.loggeduser = data;
+
+
+        }).
+        error(function () {
+            $location.path('/signin');
+        });
+    }
+
+
+});
 
 
 

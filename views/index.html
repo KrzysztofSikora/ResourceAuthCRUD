@@ -24,9 +24,11 @@
         <!--</form>-->
     <!--</div>-->
     <nav class='navbar navbar-default'>
-        <div class='container'>
+        <div ng-controller='MenuController' class='container'>
+        <!--<div class='container'>-->
             <ul class='nav navbar-nav'>
-                <li><a href='/#/'>Form</a></li>
+                <!--<li><a href='/#/'>Form</a></li>-->
+                <li><a href='/#/form'>Form</a></li>
                 <li><a href='/#/all'>Wszystko</a></li>
                 <li><a href='/#/technology'>Technologia</a></li>
                 <li><a href='/#/signup'>Rejestracja</a></li>
@@ -34,6 +36,17 @@
                 <li><a href='/#/user'>Zalogowany</a></li>
                 <li><a href='/#/rule'>Regulamin</a></li>
             </ul>
+
+            <button id="btn btn-default" type="button" class="btn btn-primary" ng-click="change()">User Info
+            <div ng-if="loggeduser != loggeduser.fistname">
+                <!-- code to render a large video block-->
+                <p> nie jest null</p>
+            </div>
+
+            <div ng-if="loggeduser == loggeduser.fistname">
+                <!-- code to render a large video block-->
+                <p> jest null</p>
+            </div>
             <!--<p ng-if='currentUser' class='navbar-text navbar-right'>-->
                 <!--Zalogowany jako {{currentUser.username}}-->
             <!--</p>-->
