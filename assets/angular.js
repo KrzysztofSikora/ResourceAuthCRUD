@@ -94,10 +94,10 @@ app.controller('ImageController', function($scope,$http,$location) {
 
 
 });
+
 app.controller('MenuController', function($scope,$http,$location) {
 
-
-    $scope.change = function () {
+    var init = function () {
         $http.get('/auth/currentuser').
         success(function (data) {
             $scope.loggeduser = data;
@@ -109,6 +109,19 @@ app.controller('MenuController', function($scope,$http,$location) {
         });
     }
 
+    init();
+    // $scope.change = function () {
+    //     $http.get('/auth/currentuser').
+    //     success(function (data) {
+    //         $scope.loggeduser = data;
+    //
+    //
+    //     }).
+    //     error(function () {
+    //         $location.path('/signin');
+    //     });
+    // }
+
 
 });
 
@@ -119,16 +132,36 @@ app.controller('authController', function($scope,$http,$location) {
     $scope.user  = {username:'',password:''};
     $scope.alert = '';
 
+    // var init = function () {
+    //     $http.get('/auth/currentuser').
+    //     success(function (data) {
+    //         $scope.loggeduser = data;
+    //
+    //
+    //     }).
+    //     error(function () {
+    //         $location.path('/signin');
+    //     });
+    // }
+    //
+    // init();
+
+
+
+
+
     $scope.login = function(user){
         $http.post('/auth/login', user).
         success(function(data) {
             $scope.loggeduser = data;
             $location.path('/user');
+
+
         }).
         error(function() {
             $scope.alert = 'Login failed'
         });
-
+   
     };
 
     $scope.signup = function(user){
@@ -185,7 +218,19 @@ app.controller('AllController', function ($scope, $http) {
     $scope.posts = [
         {}
     ];
+    var init = function () {
+        $http.get('/auth/currentuser').
+        success(function (data) {
+            $scope.loggeduser = data;
 
+
+        }).
+        error(function () {
+            $location.path('/signin');
+        });
+    }
+
+    init();
 // pobieranie za pomocą 'GET' wszystkich postów z api za pomocą $http
     $http.get('/api/dataModel').success(function (posts) {
         $scope.posts = posts
@@ -198,6 +243,20 @@ app.controller('AllController', function ($scope, $http) {
 
 app.controller('TechnologyController', function ($scope, $http) {
 
+    var init = function () {
+        $http.get('/auth/currentuser').
+        success(function (data) {
+            $scope.loggeduser = data;
+
+
+        }).
+        error(function () {
+            $location.path('/signin');
+        });
+    }
+
+    init();
+    
     $scope.posts = [
         {}
     ];
