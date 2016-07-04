@@ -1,19 +1,25 @@
 <nav class='navbar navbar-default'>
     <div class='container'>
-        <ul class='nav navbar-nav'>
-            <!--<li><a href='/#/'>Form</a></li>-->
-            <!--<li><a href='/#/form'>Form</a></li>-->
-            <li><a href='/#/all'>Wszystko</a></li>
-            <li><a href='/#/technology'>Technologia</a></li>
-            <li><a href='/#/signup'>Rejestracja</a></li>
-            <li><a href='/#/signin'>Logowanie</a></li>
-            <li><a href='/#/user'>Zalogowany</a></li>
-            <li><a href='/#/rule'>Regulamin</a></li>
-        </ul>
-    </div>
-    </div>
-</nav>
+    <ul class='nav navbar-nav' ng-if="loggeduser != loggeduser.fistname">
+        <!--<li><a href='/#/'>Form</a></li>-->
+        <li><a href='/#/form'>Form</a></li>
+        <li><a href='/#/all'>Wszystko</a></li>
+        <li><a href='/#/technology'>Technologia</a></li>
+        <li><a href='/#/user'>Zalogowany</a></li>
+        <li><a href='/#/rule'>Regulamin</a></li>
+    </ul>
 
+    <ul class='nav navbar-nav' ng-if="loggeduser == loggeduser.fistname">
+        <!--<li><a href='/#/'>Form</a></li>-->
+        <li><a href='/#/all'>Wszystko</a></li>
+        <li><a href='/#/technology'>Technologia</a></li>
+        <li><a href='/#/signup'>Rejestracja</a></li>
+        <li><a href='/#/signin'>Logowanie</a></li>
+        <li><a href='/#/rule'>Regulamin</a></li>
+    </ul>
+        </div>
+</nav>
+<div class="jumbotron">
 <div class="row">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 
@@ -50,17 +56,18 @@
             </div>
 
 
-            <div ng-if="loggeduser != loggeduser.fistname">
-                <!-- code to render a large video block-->
-                <p> nie jest null</p>
-            </div>
+            <!--<div ng-if="loggeduser != loggeduser.fistname">-->
+                <!--&lt;!&ndash; code to render a large video block&ndash;&gt;-->
+                <!--<p> nie jest null</p>-->
+            <!--</div>-->
 
-            <div ng-if="loggeduser == loggeduser.fistname">
-                <!-- code to render a large video block-->
-                <p> jest null</p>
-            </div>
+            <!--<div ng-if="loggeduser == loggeduser.fistname">-->
+                <!--&lt;!&ndash; code to render a large video block&ndash;&gt;-->
+                <!--<p> jest null</p>-->
+            <!--</div>-->
 
         </div>
 
     </div>
 </div>
+    </div>

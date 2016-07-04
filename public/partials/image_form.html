@@ -3,8 +3,29 @@
     <!--<input type="file" name="upload"><br>-->
     <!--<input type="submit" value="Upload">-->
     <!--</form>'-->
-<div ng-controller='ImageController' class='container'>
+<nav class='navbar navbar-default'>
+    <div class='container'>
+    <ul class='nav navbar-nav' ng-if="loggeduser != loggeduser.fistname">
+        <!--<li><a href='/#/'>Form</a></li>-->
+        <li><a href='/#/form'>Form</a></li>
+        <li><a href='/#/all'>Wszystko</a></li>
+        <li><a href='/#/technology'>Technologia</a></li>
+        <li><a href='/#/user'>Zalogowany</a></li>
+        <li><a href='/#/rule'>Regulamin</a></li>
+    </ul>
 
+    <ul class='nav navbar-nav' ng-if="loggeduser == loggeduser.fistname">
+        <!--<li><a href='/#/'>Form</a></li>-->
+        <li><a href='/#/all'>Wszystko</a></li>
+        <li><a href='/#/technology'>Technologia</a></li>
+        <li><a href='/#/signup'>Rejestracja</a></li>
+        <li><a href='/#/signin'>Logowanie</a></li>
+        <li><a href='/#/rule'>Regulamin</a></li>
+    </ul>
+        </div>
+</nav>
+<!--<div ng-controller='ImageController' class='container'>-->
+<div class="jumbotron">
 <form action = "/" method="post" enctype="multipart/form-data">
     <input type="file" name="myimage" ng-click="change()"/>
     <br/>
@@ -24,6 +45,7 @@
     <input type="submit" name="submit" value="submit">
 </form>
 </button>
-</div>
+    </div>
+<!--</div>-->
 <!--<img src="/57603cf21e4265cc2c46175a" />-->
 <!--<img src="/5760187e99d5fc3e18f37305" />-->

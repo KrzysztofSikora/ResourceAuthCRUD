@@ -1,24 +1,27 @@
 <!--<div ng-controller='TechnologyController' class='container'>-->
 <nav class='navbar navbar-default'>
+    <div class='container'>
+    <ul class='nav navbar-nav' ng-if="loggeduser == loggeduser.fistname">
+        <!--<li><a href='/#/'>Form</a></li>-->
+        <li><a href='/#/all'>Wszystko</a></li>
+        <li><a href='/#/technology'>Technologia</a></li>
+        <li><a href='/#/signup'>Rejestracja</a></li>
+        <li><a href='/#/signin'>Logowanie</a></li>
+        <li><a href='/#/rule'>Regulamin</a></li>
+    </ul>
+    <ul class='nav navbar-nav' ng-if="loggeduser != loggeduser.fistname">
+        <!--<li><a href='/#/'>Form</a></li>-->
+        <li><a href='/#/form'>Form</a></li>
+        <li><a href='/#/all'>Wszystko</a></li>
+        <li><a href='/#/technology'>Technologia</a></li>
+        <li><a href='/#/user'>Zalogowany</a></li>
+        <li><a href='/#/rule'>Regulamin</a></li>
+    </ul>
+        </div>
 
-<ul class='nav navbar-nav' ng-if="loggeduser != loggeduser.fistname">
-    <!--<li><a href='/#/'>Form</a></li>-->
-    <li><a href='/#/form'>Form</a></li>
-    <li><a href='/#/all'>Wszystko</a></li>
-    <li><a href='/#/technology'>Technologia</a></li>
-    <li><a href='/#/user'>Zalogowany</a></li>
-    <li><a href='/#/rule'>Regulamin</a></li>
-</ul>
 
-<ul class='nav navbar-nav' ng-if="loggeduser == loggeduser.fistname">
-    <!--<li><a href='/#/'>Form</a></li>-->
-    <li><a href='/#/all'>Wszystko</a></li>
-    <li><a href='/#/technology'>Technologia</a></li>
-    <li><a href='/#/signup'>Rejestracja</a></li>
-    <li><a href='/#/signin'>Logowanie</a></li>
-    <li><a href='/#/rule'>Regulamin</a></li>
-</ul>
-    </nav>
+</nav>
+<div class="jumbotron">
 <h3>Technologia</h3>
     <ul class='list-group'>
         <li ng-repeat="post in posts | orderBy:' -date'" class='list-group-item'>
@@ -28,4 +31,5 @@
             <div class="text-center"><h2>{{ post.description }} </h2></div>
         </li>
     </ul>
+    </div>
 <!--</div>-->

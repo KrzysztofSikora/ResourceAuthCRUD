@@ -44,7 +44,7 @@ app.config(["$routeProvider", function ($routeProvider) {
 
         .when("/rule/", {
             templateUrl: "/partials/rule.html",
-            // controller: "RulenController"
+            controller: "RuleController"
         })
 
 
@@ -79,8 +79,7 @@ app.config(["$routeProvider", function ($routeProvider) {
 
 app.controller('ImageController', function($scope,$http,$location) {
 
-
-    $scope.change = function () {
+    var init = function () {
         $http.get('/auth/currentuser').
         success(function (data) {
             $scope.loggeduser = data;
@@ -92,9 +91,50 @@ app.controller('ImageController', function($scope,$http,$location) {
         });
     }
 
+    init();
+    // $scope.change = function () {
+    //     $http.get('/auth/currentuser').
+    //     success(function (data) {
+    //         $scope.loggeduser = data;
+    //
+    //
+    //     }).
+    //     error(function () {
+    //         $location.path('/signin');
+    //     });
+    // }
+
 
 });
+app.controller('RuleController', function($scope,$http,$location) {
 
+    var init = function () {
+        $http.get('/auth/currentuser').
+        success(function (data) {
+            $scope.loggeduser = data;
+
+
+        }).
+        error(function () {
+            // $location.path('/signin');
+        });
+    }
+
+    init();
+    // $scope.change = function () {
+    //     $http.get('/auth/currentuser').
+    //     success(function (data) {
+    //         $scope.loggeduser = data;
+    //
+    //
+    //     }).
+    //     error(function () {
+    //         $location.path('/signin');
+    //     });
+    // }
+
+
+});
 app.controller('MenuController', function($scope,$http,$location) {
 
     var init = function () {
@@ -132,19 +172,19 @@ app.controller('authController', function($scope,$http,$location) {
     $scope.user  = {username:'',password:''};
     $scope.alert = '';
 
-    // var init = function () {
-    //     $http.get('/auth/currentuser').
-    //     success(function (data) {
-    //         $scope.loggeduser = data;
-    //
-    //
-    //     }).
-    //     error(function () {
-    //         $location.path('/signin');
-    //     });
-    // }
-    //
-    // init();
+    var init = function () {
+        $http.get('/auth/currentuser').
+        success(function (data) {
+            $scope.loggeduser = data;
+
+
+        }).
+        error(function () {
+            // $location.path('/signin');
+        });
+    }
+
+    init();
 
 
 
