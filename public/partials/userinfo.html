@@ -1,73 +1,74 @@
 <nav class='navbar navbar-default'>
     <div class='container'>
-    <ul class='nav navbar-nav' ng-if="loggeduser != loggeduser.fistname">
+        <ul class='nav navbar-nav' ng-if="loggeduser != loggeduser.fistname">
         <!--<li><a href='/#/'>Form</a></li>-->
         <li><a href='/#/form'>Form</a></li>
         <li><a href='/#/all'>Wszystko</a></li>
         <li><a href='/#/technology'>Technologia</a></li>
-        <li class='active'><a href='/#/user'>Zalogowany</a></li>
+        <li class='active'><a>Zalogowany</a></li>
         <li><a href='/#/rule'>Regulamin</a></li>
-    </ul>
+        </ul>
 
-    <ul class='nav navbar-nav' ng-if="loggeduser == loggeduser.fistname">
+        <ul class='nav navbar-nav' ng-if="loggeduser == loggeduser.fistname">
         <!--<li><a href='/#/'>Form</a></li>-->
         <li><a href='/#/all'>Wszystko</a></li>
         <li><a href='/#/technology'>Technologia</a></li>
         <li><a href='/#/signup'>Rejestracja</a></li>
         <li><a href='/#/signin'>Logowanie</a></li>
         <li><a href='/#/rule'>Regulamin</a></li>
-    </ul>
-        </div>
+        </ul>
+
+    </div>
 </nav>
 <div class="jumbotron">
-<div class="row">
-    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="row">
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{loggeduser.firstname}} {{loggeduser.lastname}}</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class=" col-md-12 col-lg-12 ">
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <td>Name:</td>
-                                <td>{{loggeduser.firstname}}</td>
-                            </tr>
-                            <tr>
-                                <td>Lastname:</td>
-                                <td> {{loggeduser.lastname}}</td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td><a href="mailto:info@support.com"> {{loggeduser.email}}</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{loggeduser.firstname}} {{loggeduser.lastname}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class=" col-md-12 col-lg-12 ">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td>{{loggeduser.firstname}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Lastname:</td>
+                                    <td> {{loggeduser.lastname}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><a href="mailto:info@support.com"> {{loggeduser.email}}</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-footer">
-                <button class="btn btn-danger" ng-click="logout()">Logout</button>
-                <button id="btn btn-default" type="button" class="btn btn-primary" ng-click="userinfo()">User Info
-                </button>
-            </div>
+                <div class="panel-footer">
+                    <button class="btn btn-danger" ng-click="logout()">Logout</button>
+                    <button id="btn btn-default" type="button" class="btn btn-primary" ng-click="userinfo()">User Info
+                    </button>
+                </div>
 
 
-            <!--<div ng-if="loggeduser != loggeduser.fistname">-->
+                <!--<div ng-if="loggeduser != loggeduser.fistname">-->
                 <!--&lt;!&ndash; code to render a large video block&ndash;&gt;-->
                 <!--<p> nie jest null</p>-->
-            <!--</div>-->
+                <!--</div>-->
 
-            <!--<div ng-if="loggeduser == loggeduser.fistname">-->
+                <!--<div ng-if="loggeduser == loggeduser.fistname">-->
                 <!--&lt;!&ndash; code to render a large video block&ndash;&gt;-->
                 <!--<p> jest null</p>-->
-            <!--</div>-->
+                <!--</div>-->
+
+            </div>
 
         </div>
-
     </div>
 </div>
-    </div>
