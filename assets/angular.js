@@ -75,7 +75,35 @@ app.config(["$routeProvider", function ($routeProvider) {
 }]);
 
 
+app.controller('ApplicationCtrl', function($scope,$http,$location) {
 
+    var init = function () {
+        $http.get('/auth/currentuser').
+        success(function (data) {
+            $scope.loggeduser = data;
+
+
+        }).
+        error(function () {
+            $location.path('/signin');
+        });
+    }
+
+    init();
+    // $scope.change = function () {
+    //     $http.get('/auth/currentuser').
+    //     success(function (data) {
+    //         $scope.loggeduser = data;
+    //
+    //
+    //     }).
+    //     error(function () {
+    //         $location.path('/signin');
+    //     });
+    // }
+
+
+});
 
 app.controller('ImageController', function($scope,$http,$location) {
 
@@ -194,9 +222,9 @@ app.controller('authController', function($scope,$http,$location) {
         $http.post('/auth/login', user).
         success(function(data) {
             $scope.loggeduser = data;
+            // $location.path('/user');
+            window.location.reload(true);
             $location.path('/user');
-
-
         }).
         error(function() {
             $scope.alert = 'Login failed'
