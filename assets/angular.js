@@ -273,6 +273,7 @@ app.controller('authController', function($scope,$http,$location) {
             .success(function() {
                 $scope.loggeduser = {};
                 $location.path('/signin');
+                window.location.reload(true);
 
             })
             .error(function() {
